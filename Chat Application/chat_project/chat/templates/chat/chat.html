@@ -1,0 +1,29 @@
+<!-- chat/templates/chat/chat.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}</h2>
+
+<div id="users">
+    <h3>Users</h3>
+    <ul>
+        {% for user in users %}
+        <li><a href="#">{{ user.username }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="messages">
+    <h3>Messages</h3>
+    <div id="message-list">
+        {% for message in messages %}
+        <p>{{ message.sender }}: {{ message.content }} ({{ message.timestamp }})</p>
+        {% endfor %}
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="message" placeholder="Type a message">
+        <button type="submit">Send</button>
+    </form>
+</div>
+{% endblock %}
